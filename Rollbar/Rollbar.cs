@@ -35,6 +35,12 @@ namespace RollbarDotNet
 
         private static Guid? SendBody(Body body, ErrorLevel? level, IDictionary<string, object> custom)
         {
+            if (_config == null)
+            {
+                // TODO: report nothing.
+                return null;
+            }
+
             if (string.IsNullOrWhiteSpace(_config.AccessToken) || _config.Enabled == false)
             {
                 return null;
